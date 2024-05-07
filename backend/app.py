@@ -1,7 +1,6 @@
 from flask import Flask
+from routes import bp
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    return "<p>teste</p>"
+app.register_blueprint(bp)
