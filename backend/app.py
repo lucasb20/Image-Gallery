@@ -1,5 +1,5 @@
 from flask import Flask
-from routes import bp
+from backend.routes import bp
 import os
 
 UPLOAD_FOLDER = '/uploads'

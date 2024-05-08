@@ -1,6 +1,6 @@
 
 from flask import Blueprint, request, jsonify, current_app, redirect, url_for, send_from_directory
-from utils import allowed_file
+from backend.utils import allowed_file
 from werkzeug.utils import secure_filename
 import os
 
