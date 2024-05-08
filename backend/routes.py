@@ -4,7 +4,7 @@ from utils import allowed_file
 from werkzeug.utils import secure_filename
 import os
 
-bp = Blueprint("Images", "Images", __name__, url_prefix="/image")
+bp = Blueprint("Images", __name__, url_prefix="/image")
 
 @bp.route('/', methods=['GET', 'POST'])
 def setImages():
@@ -24,12 +24,8 @@ def setImages():
 @bp.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def setImageDetail(id):
     if request.method == 'GET':
-        return 'Get image info'
+        return send_from_directory(current_app.config["UPLOAD_FOLDER"], id)
     elif request.method == 'PUT':
         return 'Update image info'
     else:
         return 'Delete image info'
-
-@bp.route('/uploads/<name>')
-def download_file(name):
-    return send_from_directory(current_app.config["UPLOAD_FOLDER"], name)
