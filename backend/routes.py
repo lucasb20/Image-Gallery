@@ -24,7 +24,10 @@ def setImages():
 @bp.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def setImageDetail(id):
     if request.method == 'GET':
-        return send_from_directory(current_app.config["UPLOAD_FOLDER"], id)
+        try:
+            return send_from_directory(current_app.config["UPLOAD_FOLDER"], id)
+        except:
+            return jsonify({'message':'Image not found'}), 404
     elif request.method == 'PUT':
         return 'Update image info'
     else:
