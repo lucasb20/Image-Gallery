@@ -19,7 +19,7 @@ def setImages():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('download_file', name=filename))
+            return redirect(url_for('Images.setImageDetail', id=filename))
 
 @bp.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def setImageDetail(id):
