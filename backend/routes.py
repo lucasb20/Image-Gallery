@@ -1,5 +1,5 @@
 
-from flask import Blueprint, request, jsonify, current_app, redirect, url_for
+from flask import Blueprint, request, jsonify, current_app, redirect, url_for, send_from_directory
 from utils import allowed_file
 from werkzeug.utils import secure_filename
 import os
@@ -21,11 +21,15 @@ def setImages():
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('download_file', name=filename))
 
-@bp.route('/id', methods=['GET', 'PUT', 'DELETE'])
-def setImageDetail():
+@bp.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
+def setImageDetail(id):
     if request.method == 'GET':
         return 'Get image info'
     elif request.method == 'PUT':
         return 'Update image info'
     else:
         return 'Delete image info'
+
+@bp.route('/uploads/<name>')
+def download_file(name):
+    return send_from_directory(current_app.config["UPLOAD_FOLDER"], name)
