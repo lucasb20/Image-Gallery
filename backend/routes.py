@@ -21,6 +21,8 @@ def setImages():
             query = query.where(Image.author.icontains(args['author']))
         if 'signature' in args:
             query = query.where(Image.signature.icontains(args['signature']))
+        if 'ord_desc' in args:
+            query = query.order_by(Image.created.desc())
         rows = db.session.execute(query).scalars().all()
         return ImageSchema(many=True).dumps(rows)
     else:
