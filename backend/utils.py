@@ -16,5 +16,5 @@ def InsertImage(title, description, author, signature, file):
         db.session.add(img)
         db.session.commit()
     except IntegrityError:
-        raise IntegrityError
+        return None
     return secure_filename(title) + '.' + extension

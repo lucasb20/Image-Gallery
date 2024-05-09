@@ -24,6 +24,8 @@ def setImages():
         if file and allowed_file(file.filename):
             description = cont['description'] if 'description' in cont else None
             filename = InsertImage(cont['title'], description, cont['author'], cont['signature'], file)
+            if not filename:
+                return jsonify({'message':'Title already exists'}), 403
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('Images.setImageDetail', id=filename))
 
