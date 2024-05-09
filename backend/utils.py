@@ -2,6 +2,7 @@ from backend.database import db
 from backend.models import Image
 from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
+from hashlib import sha256
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -11,7 +12,10 @@ def allowed_file(filename : str):
 
 def InsertImage(title, description, author, signature, file):
     extension = file.filename.rsplit('.', 1)[1].lower()
-    img = Image(title=title, description=description, author=author, signature=signature, extension=extension)
+    s = sha256()
+    s.update(signature.encode("utf-8"))
+    sign = s.hexdigest()
+    img = Image(title=title, description=description, author=author, signature=sign, extension=extension)
     try:
         db.session.add(img)
         db.session.commit()
