@@ -16,11 +16,11 @@ def setImages():
         args = request.args.to_dict()
         query = select(Image)
         if 'id' in args:
-            query = query.where(Image.id == int(args['id']))
+            query = query.where(Image.id == args['id'])
         if 'author' in args:
-            query = query.where(Image.author == args['author'])
+            query = query.where(Image.author.icontains(args['author']))
         if 'signature' in args:
-            query = query.where(Image.signature == args['signature'])
+            query = query.where(Image.signature.icontains(args['signature']))
         rows = db.session.execute(query).scalars().all()
         return ImageSchema(many=True).dumps(rows)
     else:
