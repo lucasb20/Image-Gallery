@@ -10,6 +10,7 @@ class Image(db.Model):
     description: Mapped[Optional[str]]
     author: Mapped[str]
     signature: Mapped[str]
+    extension: Mapped[str]
     created: Mapped[dt.datetime] = mapped_column(default=lambda: dt.datetime.now(dt.timezone.utc))
 
     def __repr__(self):

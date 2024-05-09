@@ -6,9 +6,9 @@ def test_no_exists(client):
 def test_post_image(client):
     img = open("tests/example.jpg", "rb")
 
-    res = client.post("/image/?title=test&author=lucasb20&signature=something", data={"file": img})
+    res = client.post("/image/?title=example&author=lucasb20&signature=something", data={"file": img})
     assert res.status_code == 302
 
 def test_get_image(client):
-    res = client.get("/image/image0.jpg")
+    res = client.get("/image/example.jpg")
     assert res.status_code == 200

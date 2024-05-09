@@ -23,10 +23,9 @@ def setImages():
             return jsonify({'message':'No selected file'}), 404
         if file and allowed_file(file.filename):
             description = cont['description'] if 'description' in cont else None
-            img = InsertImage(cont['title'], description, cont['author'], cont['signature'])
-            filename = 'image' + img.id + file.filename.rsplit('.', 1)[1].lower()
+            filename = InsertImage(cont['title'], description, cont['author'], cont['signature'], file)
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('Images.setImageDetail', id=img))
+            return redirect(url_for('Images.setImageDetail', id=filename))
 
 @bp.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def setImageDetail(id):
