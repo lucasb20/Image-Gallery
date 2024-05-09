@@ -1,8 +1,0 @@
-CREATE TABLE Image (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL UNIQUE,
-    description TEXT,
-    author TEXT NOT NULL,
-    signature TEXT NOT NULL,
-    create_at DATE NOT NULL DEFAULT CURRENT_DATE
-);
