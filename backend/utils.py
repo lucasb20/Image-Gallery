@@ -15,4 +15,4 @@ def InsertImage(title, description, author, signature):
         db.session.commit()
     except IntegrityError:
         return None
-    return "image" + str(img.id)
+    return img

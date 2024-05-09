@@ -13,7 +13,7 @@ def setImages():
         return 'Get all images'
     else:
         try:
-            cont = ImageSchema().load(request.get_json())
+            cont = ImageSchema().load(request.args.to_dict())
         except ValidationError as e:
             return jsonify(e.messages), 404
         if 'file' not in request.files:
@@ -24,7 +24,8 @@ def setImages():
         if file and allowed_file(file.filename):
             description = cont['description'] if 'description' in cont else None
             img = InsertImage(cont['title'], description, cont['author'], cont['signature'])
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], img))
+            filename = 'image' + img.id + file.filename.rsplit('.', 1)[1].lower()
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('Images.setImageDetail', id=img))
 
 @bp.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
