@@ -21,8 +21,8 @@ def setImages():
             query = query.where(Image.author == args['author'])
         if 'signature' in args:
             query = query.where(Image.signature == args['signature'])
-        res = db.session.execute(query).all()
-        return ImageSchema(many=True).dumps(res)
+        rows = db.session.execute(query).scalars().all()
+        return ImageSchema(many=True).dumps(rows)
     else:
         try:
             cont = ImageSchema().load(request.args.to_dict())
@@ -39,7 +39,7 @@ def setImages():
             if not filename:
                 return jsonify({'message':'Title already exists'}), 403
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('Images.setImageDetail', id=filename))
+            return redirect(url_for('Images.download_file', name=filename))
 
 @bp.route('/<name>', methods=['GET'])
 def download_file(name):

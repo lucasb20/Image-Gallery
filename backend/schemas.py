@@ -6,4 +6,5 @@ class ImageSchema(Schema):
     description = fields.String(allow_none=True)
     author = fields.String(required=True, validate=validate.Length(max=256))
     signature = fields.String(required=True, validate=validate.Length(max=256))
+    extension = fields.String(dump_only=True)
     created = fields.DateTime(dump_only=True)
