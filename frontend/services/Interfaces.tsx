@@ -6,5 +6,5 @@ export interface ImageInfo{
     author: string
     signature: string
     extension: string
-    created: Date
+    created: string
 }
