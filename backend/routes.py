@@ -1,7 +1,8 @@
 
 from flask import Blueprint, request, jsonify, current_app, redirect, url_for, send_from_directory
-from backend.utils import allowed_file
-from werkzeug.utils import secure_filename
+from marshmallow.exceptions import ValidationError
+from backend.utils import allowed_file, InsertImage
+from backend.schemas import ImageSchema
 import os
 
 bp = Blueprint("Images", __name__, url_prefix="/image")
@@ -11,15 +12,20 @@ def setImages():
     if request.method == 'GET':
         return 'Get all images'
     else:
+        try:
+            cont = ImageSchema().load(request.get_json())
+        except ValidationError as e:
+            return jsonify(e.messages), 404
         if 'file' not in request.files:
             return jsonify({'message':'No file part'}), 404
         file = request.files['file']
         if file.filename == '':
             return jsonify({'message':'No selected file'}), 404
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('Images.setImageDetail', id=filename))
+            description = cont['description'] if 'description' in cont else None
+            img = InsertImage(cont['title'], description, cont['author'], cont['signature'])
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], img))
+            return redirect(url_for('Images.setImageDetail', id=img))
 
 @bp.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def setImageDetail(id):
