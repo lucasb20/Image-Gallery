@@ -1,16 +1,17 @@
 
 from flask import Blueprint, request, jsonify, current_app, redirect, url_for, send_from_directory
 from marshmallow.exceptions import ValidationError
+from backend.models import Image
 from backend.utils import allowed_file, InsertImage
 from backend.schemas import ImageSchema
 import os
 
-bp = Blueprint("Images", __name__, url_prefix="/image")
+bp = Blueprint("Images", __name__, url_prefix="/images")
 
 @bp.route('/', methods=['GET', 'POST'])
 def setImages():
     if request.method == 'GET':
-        return 'Get all images'
+        return ImageSchema(many=True).dumps(Image.query.all())
     else:
         try:
             cont = ImageSchema().load(request.args.to_dict())
@@ -29,14 +30,9 @@ def setImages():
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('Images.setImageDetail', id=filename))
 
-@bp.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
-def setImageDetail(id):
-    if request.method == 'GET':
-        try:
-            return send_from_directory(current_app.config["UPLOAD_FOLDER"], id)
-        except:
-            return jsonify({'message':'Image not found'}), 404
-    elif request.method == 'PUT':
-        return 'Update image info'
-    else:
-        return 'Delete image info'
+@bp.route('/<name>', methods=['GET'])
+def download_file(name):
+    try:
+        return send_from_directory(current_app.config["UPLOAD_FOLDER"], name)
+    except:
+        return jsonify({'message':'Image not found'}), 404
