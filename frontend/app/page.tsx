@@ -1,10 +1,10 @@
-import { ImageWrapper } from "@/components/ImageWrapper";
+import { ListWrapper } from "@/components/ListWrapper";
 
 export default function Home() {
   return (
     <>
       <h1>Image Gallery</h1>
-      <ImageWrapper/>
-    </> 
+      <ListWrapper />
+    </>
   )
 }

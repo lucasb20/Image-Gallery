@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-export function ImageWrapper(){
+export function ListWrapper(){
     const [todos, setTodos] = useState([])
 
     return(

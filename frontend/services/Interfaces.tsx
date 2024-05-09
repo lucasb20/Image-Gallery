@@ -1,6 +1,10 @@
 
 export interface ImageInfo{
-    title: string;
-    description: string;
-    url: string;
+    id: number
+    title: string
+    description?: string
+    author: string
+    signature: string
+    extension: string
+    created: Date
 }
