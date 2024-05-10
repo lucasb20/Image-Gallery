@@ -8,6 +8,7 @@ export default function Home() {
       <nav>
         <ul>
           <li><Link href={"/post"}>Image Submit</Link></li>
+          <li><Link href={"/search"}>Search Page</Link></li>
         </ul>
       </nav>
       <ListWrapper />

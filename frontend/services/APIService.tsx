@@ -2,13 +2,31 @@ import { ImageUpload, SearchParams } from "@/services/Interfaces"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getImageList({ id = "", signature, author, ord_desc }: SearchParams) {
-    let url = `${API_URL}/images/?`;
+export async function getImageList( params: SearchParams ) {
+    let url = `${API_URL}/images/`;
+    let count = 0
 
-    url += `id=${id}`
-    if(signature)url += `&signature=${signature}`
-    if(author)url += `&author=${author}`
-    if(ord_desc)url += `&ord_desc=true`
+    if(params.id || params.signature || params.signature || params.ord_desc)
+        url += '?'
+
+    if(params.id){
+        url += `id=${params.id}`
+        count += 1
+    }
+    if(params.author){
+        if(count !== 0)url+='&'
+        url += `author=${params.author}`
+        count += 1
+    }
+    if(params.signature){
+        if(count !== 0)url+='&'
+        url += `signature=${params.signature}`
+        count += 1
+    }
+    if(params.ord_desc){
+        if(count !== 0)url+='&'
+        url += `ord_desc=true`
+    }
 
     const response = await fetch(url);
     return response.json();
