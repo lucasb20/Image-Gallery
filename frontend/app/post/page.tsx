@@ -2,6 +2,7 @@
 
 import { postImage } from "@/services/APIService"
 import { ImageUpload } from "@/services/Interfaces"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 
@@ -42,6 +43,7 @@ export default function Home() {
     }
 
     return (
+        <>
           <form onSubmit={handlerSubmit}>
               <div>
                   <label htmlFor="title">Title:</label>
@@ -68,5 +70,7 @@ export default function Home() {
                   <button type="submit">Submit</button>
               </div>
           </form>
+        <Link href={"/"}>Back</Link>
+        </>
     )
   }
