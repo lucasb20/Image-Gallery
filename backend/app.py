@@ -1,6 +1,7 @@
 from flask import Flask
 from backend.routes import bp
 from backend.database import db
+from backend.cli import db as db_cli
 import os
 
 app = Flask(__name__)
@@ -13,3 +14,4 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 db.init_app(app)
 
 app.register_blueprint(bp)
+app.cli.add_command(db_cli)
