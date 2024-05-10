@@ -15,3 +15,10 @@ export interface ImageInfo extends ImageBase{
 export interface ImageUpload extends ImageBase{
     file: File | null
 }
+
+export interface SearchParams{
+    id?: string
+    author?: string
+    signature?: string
+    ord_desc?: string
+}

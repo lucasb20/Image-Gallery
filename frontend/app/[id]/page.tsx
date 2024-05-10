@@ -1,6 +1,6 @@
 "use client"
 
-import { getImage, getImageListMock } from "@/services/APIService"
+import { getImageList } from "@/services/APIService"
 import { ImageInfo } from "@/services/Interfaces"
 import Image from "next/image"
 import { useEffect, useState } from "react"
@@ -10,11 +10,10 @@ export default function Home({ params }: { params: { id: number } }) {
     const API_URL = process.env.NEXT_PUBLIC_API_URL
 
     useEffect(() => {
-      /*getImage({id: params.id})
+      getImageList({ id: String(params.id) })
       .then(data => {
           setImg(data[0])
-      })*/
-      setImg(getImageListMock()[0])
+      })
     }, [])
 
     return (

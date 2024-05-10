@@ -1,15 +1,17 @@
-import { ImageInfo, ImageUpload } from "@/services/Interfaces"
+import { ImageUpload, SearchParams } from "@/services/Interfaces"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getImageList(){
-    const response = await fetch(`${API_URL}/images/`)
-    return response.json()
-}
+export async function getImageList({ id = "", signature, author, ord_desc }: SearchParams) {
+    let url = `${API_URL}/images/?`;
 
-export async function getImage({ id } : { id: number }){
-    const response = await fetch(`${API_URL}/images/?id=${id}`)
-    return response.json()
+    url += `id=${id}`
+    if(signature)url += `&signature=${signature}`
+    if(author)url += `&author=${author}`
+    if(ord_desc)url += `&ord_desc=true`
+
+    const response = await fetch(url);
+    return response.json();
 }
 
 export async function postImage(params : ImageUpload){
@@ -26,19 +28,4 @@ export async function postImage(params : ImageUpload){
         })
     })
     return response.json()
-}
-
-export function getImageListMock(){
-    const test : ImageInfo[] = []
-    for(let i = 0; i < 20; i++){
-        test[i] = {
-            id: i,
-            author: "lucas",
-            created: "0",
-            extension: "jpg",
-            title: "titulo",
-            signature: "SOMETHWEHUHTRE25555222666",
-        }
-    }
-    return test
 }

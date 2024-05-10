@@ -5,7 +5,7 @@ import { ImageInfo } from "@/services/Interfaces"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-export function ListWrapper(){
+export function Home(){
     const [imgs, setImgs] = useState<ImageInfo[]>([])
 
     useEffect(() => {
@@ -18,9 +18,13 @@ export function ListWrapper(){
     return(
         <div className="image-wrapper">
             {imgs.map((img, index) => {
-                return (<a href={`/${img.id}/`}>
-                    <Image src={`/lizzy.jpg`} width={160} height={120} alt={img.title} key={img.id}/>
-                </a>)
+                return (<><a key={img.id} href={`/${img.id}/`}>
+                    <Image src={`/lizzy.jpg`} width={160} height={120} alt={img.title}/>
+                </a>
+                <p>{img.title}</p>
+                <p>{img.author}</p>
+                <p>{img.created}</p>
+                </>)
             })}
         </div>
     )
