@@ -1,9 +1,14 @@
 import { ImageInfo } from "@/services/Interfaces"
 
-const API_URL = 'http://localhost:5000'
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getImageList(){
     const response = await fetch(`${API_URL}/images/`)
+    return response.json()
+}
+
+export async function getImage({ id } : { id: number }){
+    const response = await fetch(`${API_URL}/images/?id=${id}`)
     return response.json()
 }
 
