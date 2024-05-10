@@ -1,5 +1,6 @@
 import pytest
 from backend.app import app as curr
+from flask.testing import FlaskClient
 
 @pytest.fixture()
 def app():
@@ -13,7 +14,7 @@ def app():
 
 @pytest.fixture()
 def client(app):
-    return app.test_client()
+    return FlaskClient(app)
 
 
 @pytest.fixture()

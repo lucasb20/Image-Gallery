@@ -5,10 +5,11 @@ def test_no_exists(client):
 
 def test_post_image(client):
     img = open("tests/example.jpg", "rb")
-
     res = client.post("/images/?title=example&author=lucasb20&signature=something", data={"file": img})
+    print(res.data)
     assert res.status_code == 302
 
 def test_get_image(client):
-    res = client.get("/images/example.jpg")
+    res = client.get("/images/1.jpg")
+    print(res.data)
     assert res.status_code == 200
