@@ -1,4 +1,4 @@
-import { ImageInfo } from "@/services/Interfaces"
+import { ImageInfo, ImageUpload } from "@/services/Interfaces"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -9,6 +9,22 @@ export async function getImageList(){
 
 export async function getImage({ id } : { id: number }){
     const response = await fetch(`${API_URL}/images/?id=${id}`)
+    return response.json()
+}
+
+export async function postImage(params : ImageUpload){
+    let url = API_URL
+    if(!url)return undefined
+    url += `?title=${params.title}`
+    if(params.description) url += `&description=${params.description}`
+    url += `&author=${params.author}`
+    url += `&signature=${params.signature}/`
+    const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({
+            file: params.file
+        })
+    })
     return response.json()
 }
 
