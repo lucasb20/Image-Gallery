@@ -52,7 +52,19 @@ def setImages():
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('Images.download_file', name=filename))
 
-@bp.route('/<name>', methods=['GET'])
+@bp.route('/first/', methods=['GET'])
+def getImage():
+    args = request.args.to_dict()
+    if 'id' not in args:
+        return jsonify({'message':'Id not in query'}), 404
+    id = args["id"]
+    try:
+        img = Image.query.where(Image.id == id).first()
+        return ImageSchema().dumps(img)
+    except:
+        return jsonify({'message':'Image not found'}), 404
+
+@bp.route('/file/<name>', methods=['GET'])
 def download_file(name):
     try:
         return send_from_directory(current_app.config["UPLOAD_FOLDER"], name)
