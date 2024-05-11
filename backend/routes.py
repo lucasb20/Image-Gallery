@@ -36,18 +36,17 @@ def setImages():
         rows = db.session.execute(query).scalars().all()
         return ImageSchema(many=True).dumps(rows)
     else:
-        try:
-            cont = ImageSchema().load(request.args.to_dict())
-        except ValidationError as e:
-            return jsonify(e.messages), 404
         if 'file' not in request.files:
             return jsonify({'message':'No file part'}), 404
         file = request.files['file']
         if file.filename == '':
             return jsonify({'message':'No selected file'}), 404
+        try:
+            form = ImageSchema().load(request.form.to_dict())
+        except ValidationError as e:
+            return jsonify(e.messages), 404
         if file and allowed_file(file.filename):
-            description = cont['description'] if 'description' in cont else None
-            filename = InsertImage(cont['title'], description, cont['author'], cont['signature'], file)
+            filename = InsertImage(form, file)
             if not filename:
                 return jsonify({'message':'Title already exists'}), 403
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))

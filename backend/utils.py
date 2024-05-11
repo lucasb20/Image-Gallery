@@ -9,12 +9,12 @@ def allowed_file(filename : str):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def InsertImage(title, description, author, signature, file):
+def InsertImage(form, file):
     extension = file.filename.rsplit('.', 1)[1].lower()
     s = sha256()
-    s.update(signature.encode("utf-8"))
+    s.update(form['signature'].encode("utf-8"))
     sign = s.hexdigest()
-    img = Image(title=title, description=description, author=author, signature=sign, extension=extension)
+    img = Image(title=form['title'], description=form.get('description', None), author=form['author'], signature=sign, extension=extension)
     try:
         db.session.add(img)
         db.session.commit()
