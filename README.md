@@ -52,10 +52,10 @@ curl -X GET "http://localhost:5000/images/file/image.jpg" --output image.jpg
 
 **Screenshots**
 
-A list of 5 tasks.
+Form example.
 
-![A list of 5 tasks.](other/Screenshot_1.png)
+![Form example.](screenshots/form.png)
 
-Editing a task.
+Image detail example.
 
-![Editing a task.](other/Screenshot_2.png)
+![Image detail example.](screenshots/image_detail.png)
