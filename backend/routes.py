@@ -6,6 +6,8 @@ from backend.database import db
 from backend.models import Image
 from backend.utils import allowed_file, InsertImage
 from backend.schemas import ImageSchema
+import json
+from json.decoder import JSONDecodeError
 import os
 
 bp = Blueprint("Images", __name__, url_prefix="/images")
@@ -13,10 +15,18 @@ bp = Blueprint("Images", __name__, url_prefix="/images")
 @bp.route('/', methods=['GET', 'POST'])
 def setImages():
     if request.method == 'GET':
-        args = request.args.to_dict()
+        args = request.get_data()
+        try:
+            args = json.loads(args)
+        except JSONDecodeError:
+            args = {}
         query = select(Image)
         if 'id' in args:
             query = query.where(Image.id == args['id'])
+        if 'title' in args:
+            query = query.where(Image.title.icontains(args['title']))
+        if 'description' in args:
+            query = query.where(Image.description.icontains(args['description']))
         if 'author' in args:
             query = query.where(Image.author.icontains(args['author']))
         if 'signature' in args:
