@@ -11,7 +11,7 @@ export function ListWrapper(){
     const API_URL = process.env.NEXT_PUBLIC_API_URL
 
     useEffect(() => {
-        getImageList({})
+        getImageList()
         .then(data => {
             setImgs(data)
         })
