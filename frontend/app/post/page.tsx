@@ -47,7 +47,7 @@ export default function Home() {
 
     return (
         <>
-          <form onSubmit={handlerSubmit}>
+          <form onSubmit={handlerSubmit} encType="multipart/form-data">
               <div>
                   <label htmlFor="title">Title:</label>
                   <input type="text" name="title" id="title" value={formdata.title} onChange={handleChange} required maxLength={256}/>

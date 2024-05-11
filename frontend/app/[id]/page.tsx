@@ -22,7 +22,7 @@ export default function Home({ params }: { params: { id: number } }) {
       {
         img ? (<>
         <h1 className="title">{img.title}</h1>
-        <Image width={480} height={360} alt={img.title} src={`${API_URL}/images/${img.id}.${img.extension}`} />
+        <Image width={480} height={360} alt={img.title} src={`${API_URL}/images/${img.id}.${img.extension}`} priority />
         <p className="author">{img.author}</p>
         <p className="description">{img.description ? img.description : "No description provided."}</p>
         <p className="created">{img.created}</p>
