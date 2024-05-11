@@ -18,11 +18,11 @@ export function ListWrapper(){
     return(
         <div className="image-wrapper">
             {imgs.map((img, index) => {
-                return (<><a href={`/${img.id}/`} key={img.id}>
-                    <Image src={getImageURL(img)} width={160} height={120} alt={img.title} key={img.id}/>
-                </a>
-                <span>{img.title}</span>
-                </>)
+                return (<div className="image-item"><a href={`/${img.id}/`} key={img.id}>
+                    <Image src={getImageURL(img)} width={500} height={500} alt={img.title} key={img.id}/>
+                    </a>
+                    <span>{img.title}</span>
+                </div>)
             })}
         </div>
     )

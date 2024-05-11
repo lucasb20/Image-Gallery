@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import "@/app/styles.css"
+import "@/app/[id]/styles.css"
 
 export default function Home({ params }: { params: { id: number } }) {
     const [img, setImg] = useState<ImageInfo | undefined>()
@@ -23,8 +24,8 @@ export default function Home({ params }: { params: { id: number } }) {
     }
 
     return (
-      <>
-      {
+      <div className="container">
+        {
         img ? (<>
         <Image width={480} height={360} alt={img.title} src={getImageURL(img)} priority />
         <p className="title">{img.title}</p>
@@ -35,7 +36,7 @@ export default function Home({ params }: { params: { id: number } }) {
         </>) : ( <p>Loading</p> )
       }
       <Link href={"/"}>Back</Link>
-      </>
+      </div>
     )
   }
   
