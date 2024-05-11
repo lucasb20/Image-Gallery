@@ -25,3 +25,7 @@ def test_search_image(client):
     res = client.get("/images/", json={"title":"example"})
     print(res.data)
     assert res.status_code == 200
+
+def test_get_first(client):
+    res = client.get("/images/first/?id=1")
+    assert res.status_code == 200
