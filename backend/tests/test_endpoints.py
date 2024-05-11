@@ -17,7 +17,7 @@ def test_post_image(client):
     assert res.status_code == 302
 
 def test_get_image(client):
-    res = client.get("/images/1.jpg")
+    res = client.get("/images/file/1.jpg")
     print(res.data)
     assert res.status_code == 200
 
