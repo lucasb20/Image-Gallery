@@ -13,3 +13,8 @@ def test_get_image(client):
     res = client.get("/images/1.jpg")
     print(res.data)
     assert res.status_code == 200
+
+def test_search_image(client):
+    res = client.get("/images/", json={"title":"example"})
+    print(res.data)
+    assert res.status_code == 200
