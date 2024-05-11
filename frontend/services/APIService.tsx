@@ -39,11 +39,12 @@ export async function postImage(params : ImageUpload){
     if(params.description) url += `&description=${params.description}`
     url += `&author=${params.author}`
     url += `&signature=${params.signature}/`
+    const formData = new FormData()
+    if(!params.file)return undefined
+    formData.append('file', params.file)
     const response = await fetch(url, {
         method: 'POST',
-        body: JSON.stringify({
-            file: params.file
-        })
+        body: formData
     })
     return response.json()
 }
