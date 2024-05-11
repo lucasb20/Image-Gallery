@@ -2,6 +2,7 @@
 
 import Postform from "@/components/PostForm"
 import Link from "next/link"
+import "@/app/globals.css"
 
 export default function Home() {
     return (
