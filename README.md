@@ -52,6 +52,10 @@ curl -X GET "http://localhost:5000/images/file/image.jpg" --output image.jpg
 
 **Screenshots**
 
+Index page.
+
+![Index page.](screenshots/index_page.png)
+
 Form example.
 
 ![Form example.](screenshots/form.png)
