@@ -57,12 +57,8 @@ def getImage():
     args = request.args.to_dict()
     if 'id' not in args:
         return jsonify({'message':'Id not in query'}), 404
-    id = args["id"]
-    try:
-        img = Image.query.where(Image.id == id).first()
-        return ImageSchema().dumps(img)
-    except:
-        return jsonify({'message':'Image not found'}), 404
+    img = Image.query.where(Image.id == args["id"]).first()
+    return ImageSchema().dumps(img)
 
 @bp.route('/file/<name>', methods=['GET'])
 def download_file(name):
