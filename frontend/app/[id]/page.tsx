@@ -16,16 +16,21 @@ export default function Home({ params }: { params: { id: number } }) {
       })
     }, [])
 
+    const setTime = (utcTime : string) => {
+      const utcTimeDate = new Date(utcTime)
+      return utcTimeDate.toUTCString()
+    }
+
     return (
       <>
       {
         img ? (<>
-        <h1 className="title">{img.title}</h1>
         <Image width={480} height={360} alt={img.title} src={getImageURL(img)} priority />
-        <p className="author">{img.author}</p>
-        <p className="description">{img.description ? img.description : "No description provided."}</p>
-        <p className="created">{img.created}</p>
-        <p className="signhash">{img.signature}</p>
+        <p className="title">title: {img.title}</p>
+        <p className="author">author: {img.author}</p>
+        <p className="description">description: {img.description ? img.description : "No description provided."}</p>
+        <p className="created">create at: {setTime(img.created)}</p>
+        <p className="signhash">signature: {img.signature}</p>
         </>) : ( <p>Loading</p> )
       }
       <Link href={"/"}>Back</Link>
