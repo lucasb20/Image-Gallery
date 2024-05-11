@@ -40,6 +40,9 @@ export default function Home() {
         .then(data => {
             router.push("/")
         })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -59,7 +62,7 @@ export default function Home() {
               </div>
               <div>
                   <label htmlFor="sign">Signature:</label>
-                  <input type="text" name="sign" id="sign" value={formdata.signature} onChange={handleChange} required/>
+                  <input type="text" name="signature" id="signature" value={formdata.signature} onChange={handleChange} required/>
               </div>
               <div>
                   <label htmlFor="file">Image:</label>

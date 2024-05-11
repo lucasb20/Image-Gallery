@@ -33,7 +33,7 @@ export async function getImageList( params: SearchParams ) {
 }
 
 export async function postImage(params : ImageUpload){
-    let url = API_URL
+    let url = `${API_URL}/images/`
     if(!url)return undefined
     url += `?title=${params.title}`
     if(params.description) url += `&description=${params.description}`

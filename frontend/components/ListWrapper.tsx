@@ -20,7 +20,7 @@ export function ListWrapper(){
     return(
         <div className="image-wrapper">
             {imgs.map((img, index) => {
-                return (<a href={`/${img.id}/`}>
+                return (<a href={`/${img.id}/`} key={img.id}>
                     <Image src={`${API_URL}/images/${img.id}.${img.extension}`} width={160} height={120} alt={img.title} key={img.id}/>
                 </a>)
             })}
