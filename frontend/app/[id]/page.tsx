@@ -5,7 +5,8 @@ import { ImageInfo } from "@/services/Interfaces"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import "@/app/globals.css"
+import "@/app/styles.css"
+import "@/app/[id]/styles.css"
 
 export default function Home({ params }: { params: { id: number } }) {
     const [img, setImg] = useState<ImageInfo | undefined>()
