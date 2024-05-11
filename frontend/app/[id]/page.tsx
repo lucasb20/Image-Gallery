@@ -1,6 +1,6 @@
 "use client"
 
-import { getImageList } from "@/services/APIService"
+import { getImage, getImageURL } from "@/services/APIService"
 import { ImageInfo } from "@/services/Interfaces"
 import Image from "next/image"
 import Link from "next/link"
@@ -8,12 +8,11 @@ import { useEffect, useState } from "react"
 
 export default function Home({ params }: { params: { id: number } }) {
     const [img, setImg] = useState<ImageInfo | undefined>()
-    const API_URL = process.env.NEXT_PUBLIC_API_URL
 
     useEffect(() => {
-      getImageList({ id: String(params.id) })
+      getImage(params.id)
       .then(data => {
-          setImg(data[0])
+          setImg(data)
       })
     }, [])
 
@@ -22,7 +21,7 @@ export default function Home({ params }: { params: { id: number } }) {
       {
         img ? (<>
         <h1 className="title">{img.title}</h1>
-        <Image width={480} height={360} alt={img.title} src={`${API_URL}/images/${img.id}.${img.extension}`} priority />
+        <Image width={480} height={360} alt={img.title} src={getImageURL(img)} priority />
         <p className="author">{img.author}</p>
         <p className="description">{img.description ? img.description : "No description provided."}</p>
         <p className="created">{img.created}</p>
