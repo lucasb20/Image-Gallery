@@ -5,10 +5,6 @@
     text-align: center;
 }
 
-body {
-    background-color: cornsilk;
-}
-
 .title {
     font-size: 1.5rem;
     margin-top: 1rem;
@@ -32,15 +28,4 @@ body {
     font-size: 0.8rem;
     color: #aaa;
     margin-bottom: 2rem;
-}
-
-a {
-    display: block;
-    margin-top: 2rem;
-    text-decoration: none;
-    color: #0070f3;
-}
-
-a:hover {
-    text-decoration: underline;
 }
