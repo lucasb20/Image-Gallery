@@ -69,9 +69,7 @@ def getPage():
         args = {}
     query = select(Image)
     if 'text' in args:
-        query = query.where(or_(Image.title.icontains(args['text']), Image.description.icontains(args['text'])))
-    if 'author' in args:
-        query = query.where(Image.description.icontains(args['author']))
+        query = query.where(or_(Image.title.icontains(args['text']), Image.description.icontains(args['text']), Image.author.icontains(args['text'])))
     if 'ord_desc' in args:
         query = query.order_by(Image.created.desc())
     page = int(args['page']) if 'page' in args else 1
