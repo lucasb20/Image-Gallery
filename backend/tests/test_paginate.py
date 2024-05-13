@@ -15,9 +15,17 @@ def test_fifty_images(client):
 
 def test_first_page(client):
     res = client.post("/images/page/")
-    assert res.status_code == 200
+    body = res.get_json()
+    assert body['page'] == 1
 
 def test_other_page(client):
-    res = client.post("/images/page/?page=2")
-    print(res.get_data())
+    res = client.post("/images/page/", json={'page':2})
+    body = res.get_json()
+    assert body['page'] == 2
+
+def test_search_text(client):
+    data = {
+        'text':'lazy title2'
+    }
+    res = client.post("/images/page/", json=data)
     assert res.status_code == 200
