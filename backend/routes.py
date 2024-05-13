@@ -1,7 +1,7 @@
 
-from flask import Blueprint, request, jsonify, current_app, redirect, url_for, send_from_directory
+from flask import Blueprint, request, jsonify, current_app, send_from_directory
 from marshmallow.exceptions import ValidationError
-from sqlalchemy import select
+from sqlalchemy import select, or_
 from backend.database import db
 from backend.models import Image
 from backend.utils import allowed_file, InsertImage
@@ -59,6 +59,19 @@ def getImage():
         return jsonify({'message':'Id not in query'}), 404
     img = Image.query.where(Image.id == args["id"]).first()
     return ImageSchema().dumps(img)
+
+@bp.route('/page/', methods=['POST'])
+def getPage():
+    args = request.args.to_dict()
+    query = select(Image)
+    if 'text' in args:
+        query = query.where(or_(Image.title.icontains(args['text']), Image.description.icontains(args['text']), Image.author.icontains(args['author'])))
+    if 'ord_desc' in args:
+        query = query.order_by(Image.created.desc())
+    page = args['page'] if 'page' in args else 1
+    res = db.paginate(query, page=page, max_per_page=20)
+    items = ImageSchema(many=True).dumps(res.items)
+    return jsonify({'page':page, 'pages':res.pages, 'items':items}), 200
 
 @bp.route('/file/<name>', methods=['GET'])
 def download_file(name):
