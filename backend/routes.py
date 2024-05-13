@@ -68,7 +68,7 @@ def getPage():
         query = query.where(or_(Image.title.icontains(args['text']), Image.description.icontains(args['text']), Image.author.icontains(args['author'])))
     if 'ord_desc' in args:
         query = query.order_by(Image.created.desc())
-    page = args['page'] if 'page' in args else 1
+    page = int(args['page']) if 'page' in args else None
     res = db.paginate(query, page=page, max_per_page=20)
     items = ImageSchema(many=True).dumps(res.items)
     return jsonify({'page':page, 'pages':res.pages, 'items':items}), 200
