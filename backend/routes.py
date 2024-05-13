@@ -62,16 +62,22 @@ def getImage():
 
 @bp.route('/page/', methods=['POST'])
 def getPage():
-    args = request.args.to_dict()
+    args = request.get_data()
+    try:
+        args = json.loads(args)
+    except JSONDecodeError:
+        args = {}
     query = select(Image)
     if 'text' in args:
-        query = query.where(or_(Image.title.icontains(args['text']), Image.description.icontains(args['text']), Image.author.icontains(args['author'])))
+        query = query.where(or_(Image.title.icontains(args['text']), Image.description.icontains(args['text'])))
+    if 'author' in args:
+        query = query.where(Image.description.icontains(args['author']))
     if 'ord_desc' in args:
         query = query.order_by(Image.created.desc())
-    page = int(args['page']) if 'page' in args else None
+    page = int(args['page']) if 'page' in args else 1
     res = db.paginate(query, page=page, max_per_page=20)
     items = ImageSchema(many=True).dumps(res.items)
-    return jsonify({'page':page, 'pages':res.pages, 'items':items}), 200
+    return jsonify({'page':page, 'pages':res.pages, 'items':items, 'total':res.total}), 200
 
 @bp.route('/file/<name>', methods=['GET'])
 def download_file(name):
