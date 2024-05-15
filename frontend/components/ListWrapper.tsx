@@ -1,7 +1,7 @@
 import { getImageList, getImageURL } from "@/services/APIService"
 import { ImageInfo, SearchParams } from "@/services/Interfaces"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 
 export function ListWrapper(){
     const [imgs, setImgs] = useState<ImageInfo[]>([])
@@ -10,19 +10,32 @@ export function ListWrapper(){
     useEffect(() => {
         getImageList(query)
         .then(data => {
-            setImgs(data)
+            setImgs(JSON.parse(data.items))
         })
     }, [])
+    
+    const handlerSubmit = (e : FormEvent) => {
+        e.preventDefault()
+        getImageList(query)
+        .then(data => {
+            setImgs(data)
+        })
+    }
 
     return(
         <>
-            <form>
+            <form onSubmit={handlerSubmit}>
                 <input type="text" value={query.text} onChange={e => {
                     if(e.target.value !== ""){
                         setQuery({
                             ...query,
                             text: e.target.value
                         })
+                    }
+                    else{
+                        const new_query = {...query}
+                        if(query.text) delete new_query.text
+                        setQuery(new_query)    
                     }
                 }}
                 placeholder="Search..."
@@ -48,6 +61,7 @@ export function ListWrapper(){
                     <option value="newset">Newset</option>
                     <option value="oldest">Oldest</option>
                 </select>
+                <button type="submit">Search</button>
             </form>
             <div className="image-wrapper">
                 {imgs.map((img, index) => {
