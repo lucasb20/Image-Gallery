@@ -1,22 +1,22 @@
-form {
+.imageForm {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-form div {
+.imageForm div {
     margin-bottom: 15px;
 }
 
-form label {
+.imageForm label {
     display: block;
     font-weight: bold;
 }
 
-form input[type="text"],
-form textarea,
-form input[type="file"] {
+.imageForm input[type="text"],
+.imageForm textarea,
+.imageForm input[type="file"] {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -24,12 +24,12 @@ form input[type="file"] {
     outline: none;
 }
 
-form input[type="file"] {
+.imageForm input[type="file"] {
     cursor: pointer;
 }
 
-form button[type="reset"],
-form button[type="submit"] {
+.imageForm button[type="reset"],
+.imageForm button[type="submit"] {
     padding: 8px 15px;
     border: none;
     border-radius: 5px;
@@ -37,18 +37,18 @@ form button[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-form button[type="reset"] {
+.imageForm button[type="reset"] {
     background-color: #f0ad4e;
     color: #fff;
     margin-right: 10px;
 }
 
-form button[type="submit"] {
+.imageForm button[type="submit"] {
     background-color: #5cb85c;
     color: #fff;
 }
 
-form button[type="reset"]:hover,
-form button[type="submit"]:hover {
+.imageForm button[type="reset"]:hover,
+.imageForm button[type="submit"]:hover {
     background-color: #d9534f;
 }

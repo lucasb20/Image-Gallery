@@ -44,7 +44,7 @@ export default function Postform(){
     }
 
     return(
-        <form onSubmit={handlerSubmit}>
+        <form className="imageForm" onSubmit={handlerSubmit}>
               <div>
                   <label htmlFor="title">Title:</label>
                   <input type="text" name="title" id="title" value={formdata.title} onChange={handleChange} required maxLength={256}/>
