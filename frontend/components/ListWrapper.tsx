@@ -1,5 +1,3 @@
-"use client"
-
 import { getImageList, getImageURL } from "@/services/APIService"
 import { ImageInfo } from "@/services/Interfaces"
 import Image from "next/image"
@@ -16,14 +14,16 @@ export function ListWrapper(){
     }, [])
 
     return(
-        <div className="image-wrapper">
-            {imgs.map((img, index) => {
-                return (<div className="image-item"><a href={`/${img.id}/`} key={img.id}>
-                    <Image src={getImageURL(img)} width={500} height={500} alt={img.title} key={img.id}/>
-                    </a>
-                    <span>{img.title}</span>
-                </div>)
-            })}
-        </div>
+        <>
+            <div className="image-wrapper">
+                {imgs.map((img, index) => {
+                    return (<div className="image-item"><a href={`/${img.id}/`} key={img.id}>
+                        <Image src={getImageURL(img)} width={500} height={500} alt={img.title} key={img.id}/>
+                        </a>
+                        <span>{img.title}</span>
+                    </div>)
+                })}
+            </div>
+        </>
     )
 }

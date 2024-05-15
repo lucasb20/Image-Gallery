@@ -1,3 +1,5 @@
+"use client"
+
 import { ListWrapper } from "@/components/ListWrapper";
 import Link from "next/link";
 import "@/app/styles.css"
