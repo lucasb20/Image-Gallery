@@ -1,24 +1,47 @@
 import { getImageList, getImageURL } from "@/services/APIService"
 import { ImageInfo, SearchParams } from "@/services/Interfaces"
 import Image from "next/image"
-import { FormEvent, useEffect, useState } from "react"
+import { FormEvent, useEffect, useRef, useState } from "react"
 
 export function ListWrapper(){
     const [imgs, setImgs] = useState<ImageInfo[]>([])
     const [query, setQuery] = useState<SearchParams>({})
+    const pagContainer = useRef<HTMLUListElement>(null)
+    const [pageInfo, setPageInfo] = useState({
+        pages: 0,
+        itemsCount: 0
+    })
 
     useEffect(() => {
         getImageList(query)
         .then(data => {
             setImgs(JSON.parse(data.items))
+            setQuery({
+                page: 1
+            })
+            setPageInfo({
+                pages: data.pages,
+                itemsCount: data.total
+            })
         })
     }, [])
     
+    useEffect(() => {
+        if(pagContainer.current){
+            for (let i = 1; i <= pageInfo.pages; i++) {
+                const element = document.createElement('li')
+                if(i == query.page) element.className = 'active'
+                element.innerText = i.toString()
+                pagContainer.current.appendChild(element)
+            }
+        }
+    }, [query.page])
+
     const handlerSubmit = (e : FormEvent) => {
         e.preventDefault()
         getImageList(query)
         .then(data => {
-            setImgs(data)
+            setImgs(JSON.parse(data.items))
         })
     }
 
@@ -65,13 +88,15 @@ export function ListWrapper(){
             </form>
             <div className="image-wrapper">
                 {imgs.map((img, index) => {
-                    return (<div className="image-item"><a href={`/${img.id}/`} key={img.id}>
+                    return (<div className="image-item" key={img.id}><a href={`/${img.id}/`}>
                         <Image src={getImageURL(img)} width={500} height={500} alt={img.title}/>
                         </a>
                         <span>{img.title}</span>
                     </div>)
                 })}
             </div>
+            <ul className="pagination" ref={pagContainer}>
+            </ul>
         </>
     )
 }
