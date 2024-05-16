@@ -1,16 +1,12 @@
 import { getImageList, getImageURL } from "@/services/APIService"
 import { ImageInfo, SearchParams } from "@/services/Interfaces"
 import Image from "next/image"
-import { FormEvent, useEffect, useRef, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 
 export function ListWrapper(){
     const [imgs, setImgs] = useState<ImageInfo[]>([])
     const [query, setQuery] = useState<SearchParams>({})
-    const pagContainer = useRef<HTMLUListElement>(null)
-    const [pageInfo, setPageInfo] = useState({
-        pages: 0,
-        itemsCount: 0
-    })
+    const [pagesList, setPagesList] = useState<number[]>([])
 
     useEffect(() => {
         getImageList(query)
@@ -19,23 +15,13 @@ export function ListWrapper(){
             setQuery({
                 page: 1
             })
-            setPageInfo({
-                pages: data.pages,
-                itemsCount: data.total
-            })
+            const auxList: number[] = []
+            for (let i = 0; i < data.pages; i++) {
+                auxList.push(i + 1)
+            }
+            setPagesList(auxList)
         })
     }, [])
-    
-    useEffect(() => {
-        if(pagContainer.current){
-            for (let i = 1; i <= pageInfo.pages; i++) {
-                const element = document.createElement('li')
-                if(i == query.page) element.className = 'active'
-                element.innerText = i.toString()
-                pagContainer.current.appendChild(element)
-            }
-        }
-    }, [query.page])
 
     const handlerSubmit = (e : FormEvent) => {
         e.preventDefault()
@@ -95,7 +81,14 @@ export function ListWrapper(){
                     </div>)
                 })}
             </div>
-            <ul className="pagination" ref={pagContainer}>
+            <ul className="pagination">
+                {
+                    pagesList.map((page, index) => {
+                        return(
+                            page == query.page? <li key={page} className="active">{page}</li> : <li key={page} onClick={() => {setQuery({...query, page: page})}}>{page}</li>
+                        )
+                    })
+                }
             </ul>
         </>
     )
