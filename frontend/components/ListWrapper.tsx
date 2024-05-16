@@ -23,6 +23,13 @@ export function ListWrapper(){
         })
     }, [])
 
+    useEffect(() => {
+        getImageList(query)
+        .then(data => {
+            setImgs(JSON.parse(data.items))
+        })
+    }, [query.page])
+
     const handlerSubmit = (e : FormEvent) => {
         e.preventDefault()
         getImageList(query)
