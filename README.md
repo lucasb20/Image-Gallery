@@ -29,6 +29,14 @@ An image gallery app in Nextjs and Flask
 3. Create a .env file with the variable 'NEXT_PUBLIC_API_URL' storing the api address
 3. Run `npm run dev` to launch the application in development mode
 
+**Docker Compose**
+
+If you have Docker installed, you can also run the project using Docker Compose.
+
+1. Navigate to the project directory where the `docker-compose.yml` file is located
+
+2. Run `docker-compose up --build` command to build and start the containers
+
 **Screenshots**
 
 Index page.
