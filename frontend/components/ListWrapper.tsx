@@ -57,7 +57,7 @@ export function ListWrapper(){
                     }
                     else{
                         const new_query = {...query}
-                        if(query.text) delete new_query.text
+                        delete new_query.text
                         setQuery(new_query)    
                     }
                 }}
@@ -75,7 +75,7 @@ export function ListWrapper(){
                         const new_query = {
                             ...query
                         }
-                        if(query.ord_desc) delete new_query.ord_desc
+                        delete new_query.ord_desc
                         setQuery(new_query)
                     }
                 }}>
