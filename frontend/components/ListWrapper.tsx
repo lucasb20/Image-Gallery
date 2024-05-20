@@ -13,7 +13,7 @@ export function ListWrapper(){
         .then(data => {
             setImgs(JSON.parse(data.items))
             setQuery({
-                page: 1
+                page: data.page
             })
             const auxList: number[] = []
             for (let i = 0; i < data.pages; i++) {
@@ -35,6 +35,13 @@ export function ListWrapper(){
         getImageList(query)
         .then(data => {
             setImgs(JSON.parse(data.items))
+            if(data.pages !== pagesList.length){
+                const auxList: number[] = []
+                for (let i = 0; i < data.pages; i++) {
+                    auxList.push(i + 1)
+                }
+                setPagesList(auxList)
+            }
         })
     }
 
