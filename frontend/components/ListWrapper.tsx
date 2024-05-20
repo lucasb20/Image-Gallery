@@ -47,7 +47,7 @@ export function ListWrapper(){
 
     return(
         <>
-            <form onSubmit={handlerSubmit}>
+            <form onSubmit={handlerSubmit} className="queryForm">
                 <input type="text" value={query.text} onChange={e => {
                     if(e.target.value !== ""){
                         setQuery({
@@ -62,9 +62,7 @@ export function ListWrapper(){
                     }
                 }}
                 placeholder="Search..."
-                style={{ padding: '10px', width: '200px', marginBottom: '20px' }}
                 />
-                <label htmlFor="teste"></label>
                 <select name="order" id="order" onChange={e => {
                     console.log(e.target.value, typeof e.target.value)
                     if(e.target.value === "oldest"){
