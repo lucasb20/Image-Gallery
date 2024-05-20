@@ -26,29 +26,8 @@ An image gallery app in Nextjs and Flask
 
 1. Enter the frontend application folder
 2. Run `npm install` to install dependencies
+3. Create a .env file with the variable 'NEXT_PUBLIC_API_URL' storing the api address
 3. Run `npm run dev` to launch the application in development mode
-
-**Usage Examples**
-
-Get Image
-```bash
-curl -X GET "http://localhost:5000/images/?title=mountain&author=john&ord_desc=true"
-```
-
-Upload Image
-```bash
-curl -X POST -F "file=@/path/to/image.jpg" -F "title=Mountain View" -F "description=Scenic view of mountains" -F "author=John Doe" -F "signature=JD" "http://localhost:5000/images/"
-```
-
-Get First Image
-```bash
-curl -X GET "http://localhost:5000/images/first/?id=1"
-```
-
-Download Image File
-```bash
-curl -X GET "http://localhost:5000/images/file/image.jpg" --output image.jpg
-```
 
 **Screenshots**
 
