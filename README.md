@@ -3,9 +3,7 @@ An image gallery app in Nextjs and Flask
 
 **Description**
 
- This Flask project provides endpoints to manage images in a gallery.
-
- The aim of the project was to create a file server. A frontend application in Nextjs was also created just to test its functionalities.
+ This is a web application project to manage images in a gallery.
 
 **Installation instructions**
 
@@ -27,7 +25,7 @@ An image gallery app in Nextjs and Flask
 1. Enter the frontend application folder
 2. Run `npm install` to install dependencies
 3. Create a .env file with the variable 'NEXT_PUBLIC_API_URL' storing the api address
-3. Run `npm run dev` to launch the application in development mode
+4. Run `npm run dev` to launch the application in development mode
 
 **Docker Compose**
 
