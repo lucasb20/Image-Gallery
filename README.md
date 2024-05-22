@@ -37,14 +37,18 @@ If you have Docker installed, you can also run the project using Docker Compose.
 
 **Screenshots**
 
-Index page.
+- Index page.
 
 ![Index page.](screenshots/index_page.png)
 
-Form example.
+- Post Form.
 
-![Form example.](screenshots/form.png)
+![Post Form.](screenshots/form.png)
 
-Image detail example.
+- Search Bar.
+
+![Search Bar.](screenshots/search.png)
+
+- Image detail example.
 
 ![Image detail example.](screenshots/image_detail.png)
