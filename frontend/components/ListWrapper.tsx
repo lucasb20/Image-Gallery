@@ -87,7 +87,9 @@ export function ListWrapper(){
             <div className="image-wrapper">
                 {imgs.map((img, index) => {
                     return (<div className="image-item" key={img.id}><a href={`/${img.id}/`}>
-                        <Image src={getImageURL(img)} width={500} height={500} alt={img.title}/>
+                        <div>
+                            <Image src={getImageURL(img)} fill alt={img.title}/>
+                        </div>
                         </a>
                         <span>{img.title}</span>
                     </div>)

@@ -12,7 +12,7 @@ body {
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 5px;
 }
 
 h1 {
@@ -44,8 +44,7 @@ a:hover {
 
 .image-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(5, 150px);
 }
 
 .image-item {
@@ -53,15 +52,15 @@ a:hover {
   overflow: hidden;
 }
 
-.image-item img {
-  width: 100%;
-  height: auto;
-  display: block;
+.image-item div{
+  position: relative;
+  margin: 0 auto;
+  height: 100px;
+  width: 100px;
 }
 
 .image-item span {
   display: block;
-  margin-top: 5px;
   text-align: center;
   font-size: 14px;
 }
