@@ -1,8 +1,16 @@
 
-.container {
+.image-detail {
     max-width: 480px;
     margin: 0 auto;
     text-align: center;
+    padding: 20px;
+}
+
+.image-detail div{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: auto;
 }
 
 .title {

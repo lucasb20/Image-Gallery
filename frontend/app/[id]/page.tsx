@@ -24,10 +24,10 @@ export default function Home({ params }: { params: { id: number } }) {
     }
 
     return (
-      <div className="container">
+      <div className="image-detail">
         {
         img ? (<>
-        <Image width={480} height={360} alt={img.title} src={getImageURL(img)} priority />
+        <div><Image alt={img.title} src={getImageURL(img)} fill priority /></div>
         <p className="title">{img.title}</p>
         <p className="author">author: {img.author}</p>
         <p className="description">description: {img.description ? img.description : "No description provided."}</p>
