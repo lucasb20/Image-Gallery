@@ -5,7 +5,7 @@ from sqlalchemy import select, or_
 from backend.database import db
 from backend.models import Image
 from backend.utils import allowed_file, InsertImage
-from backend.schemas import ImageSchema
+from backend.schemas import ImageSchema, PageSchema
 import json
 from json.decoder import JSONDecodeError
 import os
@@ -53,9 +53,8 @@ def getPage():
     if 'ord_desc' in args:
         query = query.order_by(Image.created.desc())
     page = int(args['page']) if 'page' in args else 1
-    res = db.paginate(query, page=page, max_per_page=20)
-    items = ImageSchema(many=True).dumps(res.items)
-    return jsonify({'page':page, 'pages':res.pages, 'items':items, 'total':res.total}), 200
+    paginate = db.paginate(query, page=page, max_per_page=20)
+    return jsonify(PageSchema().dump({'page': page, 'pages': paginate.pages, 'items': paginate.items, 'total': paginate.total})), 200
 
 @bp.route('/file/<name>', methods=['GET'])
 def download_file(name):

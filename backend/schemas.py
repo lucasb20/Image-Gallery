@@ -8,3 +8,9 @@ class ImageSchema(Schema):
     signature = fields.String(required=True, validate=validate.Length(max=256))
     extension = fields.String(dump_only=True)
     created = fields.DateTime(dump_only=True)
+
+class PageSchema(Schema):
+    page = fields.Integer()
+    pages = fields.Integer()
+    items = fields.Nested(ImageSchema(many=True))
+    total = fields.Integer()
