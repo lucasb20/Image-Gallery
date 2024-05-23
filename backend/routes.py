@@ -29,6 +29,7 @@ def setImages():
             return jsonify({'message':'Title already exists'}), 403
         file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
         return jsonify({'message':'File sent sucessfully.'}), 201
+    return jsonify({'message':'Extension not allowed.'}), 201
 
 @bp.route('/first/', methods=['GET'])
 def getImage():
