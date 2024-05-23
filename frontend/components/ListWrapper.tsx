@@ -12,7 +12,7 @@ export function ListWrapper(){
     useEffect(() => {
         getImageList(query)
         .then(data => {
-            setImgs(JSON.parse(data.items))
+            setImgs(data.items)
             setQuery({
                 page: data.page
             })
@@ -27,7 +27,7 @@ export function ListWrapper(){
     useEffect(() => {
         getImageList(query)
         .then(data => {
-            setImgs(JSON.parse(data.items))
+            setImgs(data.items)
         })
     }, [query.page])
 
