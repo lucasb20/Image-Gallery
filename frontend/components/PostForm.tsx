@@ -36,6 +36,7 @@ export default function Postform(){
         e.preventDefault()
         postImage(formdata)
         .then(data => {
+            alert(data.message)
             router.push("/")
         })
         .catch(err => {
