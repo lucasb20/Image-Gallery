@@ -39,5 +39,5 @@ export async function postImage(params : ImageUpload){
 }
 
 export function getImageURL(img : ImageInfo){
-    return `${API_URL}/images/file/${img.id}.${img.extension}`
+    return `${img.id}.${img.extension}`
 }

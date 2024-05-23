@@ -1,5 +1,6 @@
 import { getImageList, getImageURL } from "@/services/APIService"
 import { ImageInfo, SearchParams } from "@/services/Interfaces"
+import myImageLoader from "@/services/Loader"
 import Image from "next/image"
 import { FormEvent, useEffect, useState } from "react"
 
@@ -88,7 +89,7 @@ export function ListWrapper(){
                 {imgs.map((img, index) => {
                     return (<div className="image-item" key={img.id}><a href={`/${img.id}/`}>
                         <div>
-                            <Image src={getImageURL(img)} fill alt={img.title}/>
+                            <Image loader={myImageLoader} src={getImageURL(img)} fill alt={img.title}/>
                         </div>
                         </a>
                         <span>{img.title}</span>

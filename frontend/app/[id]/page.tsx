@@ -7,6 +7,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import "@/app/styles.css"
 import "@/app/[id]/styles.css"
+import myImageLoader from "@/services/Loader"
 
 export default function Home({ params }: { params: { id: number } }) {
     const [img, setImg] = useState<ImageInfo | undefined>()
@@ -27,7 +28,7 @@ export default function Home({ params }: { params: { id: number } }) {
       <div className="image-detail">
         {
         img ? (<>
-        <div><Image alt={img.title} src={getImageURL(img)} fill priority /></div>
+        <div><Image loader={myImageLoader} alt={img.title} src={getImageURL(img)} fill priority /></div>
         <p className="title">{img.title}</p>
         <p className="author">author: {img.author}</p>
         <p className="description">description: {img.description ? img.description : "No description provided."}</p>
