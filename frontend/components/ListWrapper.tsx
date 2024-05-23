@@ -97,6 +97,7 @@ export function ListWrapper(){
                 })}
             </div>
             <ul className="pagination">
+                {pagesList.length ? "" : <p style={{ margin: "100px" }}>No images submitted yet.</p>}
                 {
                     pagesList.map((page, index) => {
                         return(
