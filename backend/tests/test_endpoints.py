@@ -13,16 +13,14 @@ def test_post_image(client):
         "signature": "something"
     }
     res = client.post("/images/", data=data)
-    print(res.data)
-    assert res.status_code == 302
+    assert res.status_code == 201
 
 def test_get_image(client):
     res = client.get("/images/file/1.jpg")
-    print(res.data)
     assert res.status_code == 200
 
 def test_search_image(client):
-    res = client.get("/images/", json={"title":"example"})
+    res = client.post("/images/page/", json={"text":"example"})
     print(res.data)
     assert res.status_code == 200
 

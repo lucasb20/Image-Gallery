@@ -1,5 +1,5 @@
 import pytest
-from backend.app import app as curr
+from app import app as curr
 from flask.testing import FlaskClient
 
 @pytest.fixture()
