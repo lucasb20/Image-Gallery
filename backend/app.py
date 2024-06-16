@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from backend.routes import bp
-from backend.database import db
-from backend.cli import db as db_cli
+from routes import bp
+from database import db
+from cli import db as db_cli
 import os
 
 app = Flask(__name__)

@@ -1,5 +1,5 @@
-from backend.database import db
-from backend.models import Image
+from database import db
+from models import Image
 from sqlalchemy.exc import IntegrityError
 from hashlib import sha256
 

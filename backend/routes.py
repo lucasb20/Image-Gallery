@@ -2,10 +2,10 @@
 from flask import Blueprint, request, jsonify, current_app, send_from_directory
 from marshmallow.exceptions import ValidationError
 from sqlalchemy import select, or_
-from backend.database import db
-from backend.models import Image
-from backend.utils import allowed_file, InsertImage
-from backend.schemas import ImageSchema, PageSchema
+from database import db
+from models import Image
+from utils import allowed_file, InsertImage
+from schemas import ImageSchema, PageSchema
 import json
 from json.decoder import JSONDecodeError
 import os
