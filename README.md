@@ -1,4 +1,4 @@
-# Image-Gallery
+# image-gallery
 An image gallery app in Nextjs and Flask
 
 **Description**
