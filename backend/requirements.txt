@@ -3,3 +3,4 @@ pytest
 marshmallow
 Flask-SQLAlchemy
 flask-cors
+gunicorn

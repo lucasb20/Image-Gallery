@@ -7,7 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 80
 
 CMD flask db create-all && \
-    flask run --host=0.0.0.0
+    gunicorn --preload -w 4 -b 0.0.0.0:80 app:app
