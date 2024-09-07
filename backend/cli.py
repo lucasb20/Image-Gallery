@@ -10,8 +10,8 @@ def db():
 @click.command()
 @with_appcontext
 def create_all():
-    from backend.database import db
-    from backend.models import Image
+    from database import db
+    from models import Image
 
     Path('./uploads').mkdir(exist_ok=True)
     db.create_all()
